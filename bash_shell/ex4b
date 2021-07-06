@@ -1,0 +1,21 @@
+#!/bin/bash
+#Sample answer for SA course
+if [ $# -ne 1 ]; then
+	echo -n "Please enter a username: "
+	read un
+else
+	un=$1
+fi
+
+if grep $un /etc/passwd > /dev/null; then
+	echo $un is present in the /etc/passwd file
+else
+	echo $un is not present in the /etc/passwd file
+fi
+
+if who | grep $un > /dev/null; then
+	echo $un is logged in
+else
+	echo $un is not logged in
+fi
+exit 0

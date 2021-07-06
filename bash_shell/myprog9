@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+#    myprog9 - script to backup multiple files
+#
+if [ $# -le 1 ]; then
+        echo  -n "What do you want to copy:   "
+        read  tocopy
+else
+        tocopy=$*
+fi
+when=`date`
+for fyle in $tocopy
+do
+        cp  $fyle $HOME/logback
+        stats=`wc -c $fyle | gawk '{print $1}' `
+        echo  "$when copied  size $stats  bytes Filename: $fyle"
+done
+exit 0

@@ -1,0 +1,24 @@
+#!/bin/bash 
+destiny=xxxxx
+typeset -i count
+count=0
+while [[ ! -d $destiny ]]
+do
+    count=$count+1
+    if [[ $count == 5 || $destiny == \? ]] ; then
+        echo subdirectories available ...
+        ls -l | grep ^d | nawk '{echo $9}'
+        fi
+    echo -n "Which directory shall I put them in? "
+    read destiny
+done
+for fname in $*
+do
+    if [[ -a $destiny/$fname ]] ; then
+        echo $fname NOT COPIED
+    else
+        cp $fname $destiny
+        echo $fname copied
+    fi
+done
+exit 0

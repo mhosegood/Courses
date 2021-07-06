@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+#    myprog6 - script to backup a multiple files
+#       with check that at least 1 parameter is given
+#
+if [ $#  -lt  1 ] 
+then
+        echo "Usage: $0 file [file ...]"
+	exit 1
+else
+        cp  $@  $HOME/logback
+        echo  "copy(ies) of $@ made in backup directory"
+        echo  file count: $#
+fi
+exit 0

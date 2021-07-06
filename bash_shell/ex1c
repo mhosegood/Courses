@@ -1,0 +1,4 @@
+#!/bin/bash
+# Add entry to phone list
+echo $*  >> $HOME/p.list
+exit 0

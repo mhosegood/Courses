@@ -1,0 +1,15 @@
+#!/bin/bash 
+#
+if [[ ! -d ~/hold ]] ; then
+        mkdir ~/hold
+fi
+for fname in $*
+do
+    if [[ -a ~/hold/$fname ]] ; then
+        echo $fname NOT COPIED
+    else
+        cp $fname ~/hold
+        echo $fname copied
+    fi
+done
+exit 0

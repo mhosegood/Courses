@@ -1,0 +1,27 @@
+#!/bin/bash
+# temperature conversion
+typeset -i ftemp
+typeset -i ctemp
+ftemp=0
+ctemp=0
+
+if [ $# -gt 1 ]
+then
+	echo "Usage $0 number"
+	echo "   or $0"	
+	exit
+fi
+
+if [ $# -eq 1 ]
+then
+	ftemp=$1
+    else
+	echo -n "Give temperature: "
+	read ftemp
+fi	
+
+(( ctemp=(ftemp-32)*5/9 ))
+
+echo "Temperature (degrees F)  $ftemp"
+echo "Converts to (degrees C)  $ctemp"
+exit 0

@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# Sample program b3 - what does it do?
+#
+string=$1
+shift
+for parameter in $@
+do
+	if [ -f $parameter -a -r $parameter ]; then
+		echo -n "$parameter "
+		grep -ic $string $parameter
+	else
+		echo $parameter is not a readable file
+	fi
+done

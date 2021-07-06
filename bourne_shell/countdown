@@ -1,0 +1,8 @@
+#!/bin/sh
+#countdown
+for  num  in  10  9  8  7  6  5  4  3  2  1  Lift-off!!
+do
+	echo   $num
+	echo   
+	sleep  1
+done

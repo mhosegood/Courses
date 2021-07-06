@@ -1,0 +1,65 @@
+#!/bin/bash
+#
+#  report on a list of files
+#
+countem()
+{
+	if [ $totalsize ]; then
+                :
+        else
+                totalsize=0
+        fi
+        if [ $count ]; then  
+                :      
+        else   
+                count=0    
+        fi     
+
+        size=`wc -c $1 | gawk '{print $1}'`
+        totalsize=`expr $totalsize + $size`	
+	count=`expr $count + 1`
+}
+minormax()
+{
+	if [ $largest ]; then
+		:
+	else
+		largest=0
+	fi
+	if [ $smallest ]; then
+		:
+	else
+		smallest=9999999999
+	fi
+	if [ $size -gt $largest ]; then
+		largest=$size
+		largestfn=$infile
+	fi
+	if [ $size -lt $smallest ]; then
+		smallest=$size
+		smallestfn=$infile
+	fi
+}
+
+if [ $# -le 1 ]; then
+        echo  -n "What do you want to process   "
+        read  ifiles
+else
+        ifiles=$*
+fi
+echo Report generated on `uname -n` on `date`
+echo Report on files $ifiles
+for infile in $ifiles
+do
+	if [ ! -r $infile ]; then
+        echo "Error - input file $infile is not readable"
+	continue
+	fi
+        countem $infile
+	minormax
+done
+echo "Number of files: $count"
+echo "Total size:      $totalsize"
+echo "Largest file is $largestfn and is $largest bytes"
+echo "Smallest file is $smallestfn and is $smallest bytes"
+exit 0

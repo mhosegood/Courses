@@ -1,0 +1,65 @@
+#!/bin/bash
+# Final course exercise
+# Enter while loop until directory name given
+while :
+do
+echo -n "Enter a directory name please: "
+read idir
+if [[ ! -d $idir ]]; then
+	echo Sorry not a directory
+	continue
+else
+	break
+fi
+done
+# Get a list of files into array files
+files=(`ls -l $idir | grep ^- | gawk '{print $9}'`)
+
+# Show the user all the file names
+echo These are the plain files in the chosen directory:-
+echo ${files[*]}
+
+#Ask the user to type a list of files to be processed
+echo -n "Enter filename[s] from above list: "
+read ifiles
+
+#Now process the files
+for fn in $ifiles
+do
+	echo
+	echo Current filename is $fn
+	PS3="What action would you like to take on the file?"
+	select action in Copy Display Backup Quit
+	do
+		case $action in
+			Copy) 	   echo -n "Filename to copy to [$fn.bak]:- " 
+				   read cpfile
+				   if [[ $cpfile == "" ]]; then
+					cpfile=$fn.bak
+				   fi
+				   if [[ -f $cpfile ]]; then
+					echo Sorry - $cpfile already exists
+					break
+				   fi
+				   cp $idir/$fn $cpfile
+				   break ;;
+			Display)   if file $idir/$fn | grep -i script > /dev/null; then
+				   	more $idir/$fn 
+				   else
+					echo $fn is not a script
+				   fi 
+				   break ;;
+			Backup)    if cmp -s $idir/$fn ~/logback/$fn; then
+				   	echo $fn and ~/logback/$fn are identical
+					echo Not copied
+					break
+				   else 
+				   	cp $idir/$fn ~/logback 
+				   fi
+				   break ;;
+			Quit) break ;;
+		esac
+	done
+done
+
+exit 0

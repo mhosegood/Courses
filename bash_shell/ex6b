@@ -1,0 +1,23 @@
+#!/bin/bash
+# Sample answer for while loop question
+echo This script will sum all directories entered
+total=0
+count=0
+while true
+do
+	echo -n "Please enter a directory: "
+	read inum
+	if [ $inum = q ]; then
+		break
+	fi
+	if [ -d $inum ]; then
+		dirsize=`du -sk $inum | gawk '{print $1}'`
+		total=`expr $total + $dirsize`
+		count=`expr $count + 1`
+	else
+		echo $inum is not a directory - not included
+	fi
+done
+echo Total of directory sizes = $total
+echo Number of directories entered was $count
+exit 0

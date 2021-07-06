@@ -1,0 +1,16 @@
+#!/bin/bash
+# page 42 exercise
+# file name is ex5
+day=`date +%a`
+case "$day"
+in
+	Mon) echo Monday ;;
+	Tue) echo Tuesday ;;
+	Wed) echo Wednesday ;;
+	Thu) echo Thursday ;;
+	Fri) echo Friday ;;
+	Sat) echo Saturday ;;
+	Sun) echo Sunday ;;
+	*) echo Impossible day!! ;;
+esac
+exit 0

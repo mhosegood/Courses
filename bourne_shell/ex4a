@@ -1,0 +1,10 @@
+#!/bin/sh
+# Sample answer for scripting course
+# file name is ex4a
+day=`date +%a`
+if [ $day = "Sat" -o $day = "Sun" ]; then
+	echo "Yipee its the weekend"
+else
+	echo "Its another working day"
+fi
+exit 0

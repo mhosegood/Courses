@@ -1,0 +1,18 @@
+#!/bin/bash
+# Example script for SA course
+if [ $# -ne 1 ]; then
+	echo Only one argument please
+	exit
+fi
+
+if [ -f $1 ]; then
+	echo Object $1 is a file
+	exit
+fi
+
+if [ -d $1 ]; then
+	echo Object $1 is a directory
+	exit
+fi
+echo Object $1 is neither a file or directory
+exit 0

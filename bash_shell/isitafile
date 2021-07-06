@@ -1,0 +1,14 @@
+#!/bin/bash
+while true
+do
+	echo -n "Give me a filename please: "
+	read ifile
+	if [ ! -f $ifile ]; then
+		echo $ifile is not a file - please try again
+		continue
+	else
+		break
+	fi
+done
+echo The filename given is $ifile
+exit 0

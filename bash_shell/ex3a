@@ -1,0 +1,15 @@
+#!/bin/bash
+# Sample script for SA course
+if [ $# -ne 1 ]; then
+	echo -n "Please enter a directory name: "
+	read idir
+else
+	idir=$1
+fi
+
+if [ ! -d $idir ]; then
+	echo $idir is not a directory
+	exit
+fi
+du -sk $idir
+exit 0

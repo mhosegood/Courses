@@ -1,0 +1,8 @@
+#!/bin/bash
+select  var  in  List  Quit  Help
+do
+	echo  $var
+	if  [[  ${var:="Quit"}  =  "Quit"  ]]
+	then  exit;  fi
+done
+exit 0

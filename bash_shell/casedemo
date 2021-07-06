@@ -1,0 +1,15 @@
+#!/bin/bash
+# casedemo
+echo -n "Please type a character: "
+read reply
+case "$reply"
+in
+        ??*)         			echo that\'s more than 1 character ;;
+        e)              			echo the most common letter ...  ;;
+        [aiou])         			echo that\'s a lower case vowel ;;
+        [AEIOU])        			echo that\'s a capital vowel ;;
+        [0-9])          			echo that\'s a digit ;;
+        *)              			echo that\'s not what I was looking for
+                        			echo I was looking for a vowel or digit ;;
+esac
+exit 0

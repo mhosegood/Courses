@@ -1,0 +1,15 @@
+#!/bin/bash
+# vowel
+echo  -n " Please type a vowel > "
+read char
+case "$char"
+in
+	a | A ) echo "You typed a $char" ;;
+	e | E ) echo "You typed a $char" ;;
+	i | I ) echo "You typed a $char" ;;
+	o | O ) echo "You typed a $char" ;;
+	u | U ) echo "You typed a $char" ;;
+	[0-9] ) echo " I did not ask you to type a number!!";;
+	* ) echo " I did ask you to type a vowel?" ;;
+esac
+exit 0

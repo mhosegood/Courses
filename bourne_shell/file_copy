@@ -1,0 +1,9 @@
+#!/bin/sh
+#A file copy program
+if [  $#  -ne  2 ]
+then
+	exit
+fi
+if [  -f   $2  ] ; then  exit ; fi
+if [  !  -r  $1  ] ; then exit ; fi
+cp   $1   $2

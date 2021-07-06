@@ -1,0 +1,35 @@
+#!/bin/bash
+#
+#  report on a list of files
+#
+typeset -i size
+typeset -i totalsize
+typeset -i count
+size=0; totalsize=0; count=0
+
+countem()
+{
+        size=`wc -c $1 | gawk '{print $1}'`
+        (( totalsize+=size ))
+	(( count+=1 ))
+}
+
+if (( $# <= 1 )); then
+        echo  -n "What do you want to process   "
+        read  ifiles
+else
+        ifiles=$*
+fi
+echo Report generated on `uname -n` on `date`
+echo Report on files $ifiles
+for infile in $ifiles
+do
+	if [[ ! -r $infile ]]; then
+        echo "Error - input file $infile is not readable"
+	continue
+	fi
+        countem $infile
+done
+echo "Number of files: $count"
+echo "Total size:      $totalsize"
+exit 0

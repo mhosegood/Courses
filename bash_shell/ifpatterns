@@ -1,0 +1,22 @@
+#!/bin/bash
+# Example script which compares strings against patterns
+echo -n "Enter a string: "
+read s1
+
+#Test 1
+if [[ $s1 == *[A-za-z]* ]]; then
+	echo String s1 has an alphabetic character in it
+fi
+
+#Test 2
+if [[ $s1 != *[A-za-z]* ]]; then
+        echo String s1 does not contain an alphabetic character
+fi
+
+#Test 3
+if [[ $s1 == [nN]* ]]; then
+	echo String s1 begins with N or n
+fi
+
+
+exit 0

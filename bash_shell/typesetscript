@@ -1,0 +1,44 @@
+#!/bin/bash
+# Example showing the use of typeset variables and functions
+typeset -r r1="Readonly string"
+typeset -i n1=99
+
+function setme
+{
+ typeset -i n2=100
+ typeset r2="Ordinary string"
+ n3="Non-typeset string"
+ glob1=$n2; glob2=$r2; glob3=$n3
+ echo The values while in the setme function are
+ echo n2 = $n2
+ echo r2 = $r2
+ echo n3 = $n3
+ echo glob1 = $glob1
+ echo glob2 = $glob2
+ echo glob3 = $glob3
+}
+
+echo Values of variables before calling setme is as follows:-
+echo ""
+echo $r1 is the value of variable r1 declared outside the function
+echo $n1 is the value of variable n1 declared outside the function
+echo $n2 is the value of variable n2 declared inside the function
+echo $r2 is the value of variable r2 declared inside the function
+echo $n3 is the value of variable n3 declared inside the function
+echo ""
+ sleep 3
+ setme
+echo ""
+echo Values of variables after calling setme is as follows:-
+echo $r1 is the value of variable r1 declared outside the function
+echo $n1 is the value of variable n1 declared outside the function
+echo $n2 is the value of variable n2 declared inside the function
+echo $r2 is the value of variable r2 declared inside the function
+echo $n3 is the value of variable n3 declared inside the function
+echo ""
+ sleep 3
+echo But we can see the three glob variables assigned at the end of the function:-
+echo Value of variable glob1 is $glob1
+echo Value of variable glob2 is $glob2
+echo Value of variable glob3 is $glob3
+exit 0

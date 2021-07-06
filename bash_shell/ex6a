@@ -1,0 +1,18 @@
+#!/bin/bash
+# Sample answer for while loop question
+echo This script will sum all integers entered
+total=0
+count=0
+while true
+do
+	echo -n "Please enter a number: "
+	read inum
+	if [ $inum = q ]; then
+		break
+	fi
+	total=`expr $total + $inum`
+	count=`expr $count + 1`
+done
+echo Sum = $total
+echo Numbers entered was $count
+exit 0

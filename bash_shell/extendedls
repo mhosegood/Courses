@@ -1,0 +1,20 @@
+#!/bin/bash
+# extended_ls
+if (( $# > 0 ))
+then
+        for varf in $*
+        do
+                if [[ -d $varf ]]
+                then
+                        echo " $varf  (DIR)"
+                elif [[ -x $varf  ]]
+                then
+                        echo " $varf  (EXEC)"
+                else
+                        echo " $varf   (FILE)"
+                fi
+        done
+else
+        echo   "Please run with file(s) as arguments."
+fi
+exit 0

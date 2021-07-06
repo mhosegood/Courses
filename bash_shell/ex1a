@@ -1,0 +1,6 @@
+#!/bin/bash
+# First scripting Bourne shell exercise
+# Copy on file to another
+cp $1 $2
+echo Copied $1 to $2
+exit 0

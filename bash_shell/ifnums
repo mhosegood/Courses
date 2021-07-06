@@ -1,0 +1,36 @@
+#!/bin/bash
+# different tests to compare numbers
+a=$RANDOM
+b=$RANDOM
+echo Variable a = $a and variable b = $b
+#     RANDOM    Each time this variable is  referenced,  a  random
+#               integer,   uniformly  distributed  between  0  and
+#               32767,  is  generated.  The  sequence  of   random
+#               numbers  can be initialized by assigning a numeric
+#               value to RANDOM.
+#Test 1
+if (( a == b )); then
+	echo Variables a and b hold the same value
+	echo You must enter the lottery this week
+fi
+
+#Test 2
+if test $a -lt $b ; then
+	echo Variable a is smaller than b
+fi
+
+#Test 3
+if [ $a -gt $b ]; then
+	echo Variable a is larger than variable b
+fi
+ 
+#Test 4
+if [[ $a -ge $b ]]; then
+	echo Variable a is larger or equal to variable b
+fi	
+
+#Test 5
+if [[ $a = $b ]]; then
+	echo Variable a is equal to variable b
+fi
+exit 0

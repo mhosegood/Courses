@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+#    myprog2 - script to backup a file
+#
+cp $1 $HOME/logback
+echo Copy of $1 made in logback directory
+exit 0

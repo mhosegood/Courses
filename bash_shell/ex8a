@@ -1,0 +1,43 @@
+#!/bin/bash
+# Sample answer for trap exercise
+echo This script will sum all integers entered
+trap "echo Sorry - I have to exit; sleep 2; exit" 2
+while [ $# > 0 ]
+do
+        if [ .$1 = .-v ]; then
+                tell=1
+                shift
+                continue
+        fi
+        if [ .$1 = .-h ]; then
+                help=1
+                shift
+                continue
+        fi
+        break
+done
+if [ $tell ]; then
+	set -x
+	set -v
+fi
+if [ $help ]; then
+	echo A friendly help message
+	echo Run me like this please:-
+	echo "$0 [-v] [-h]"
+	exit
+fi
+total=0
+count=0
+while true
+do
+	echo -n "Please enter a number: "
+	read inum
+	if [ $inum = q ]; then
+		break
+	fi
+	total=`expr $total + $inum`
+	count=`expr $count + 1`
+done
+echo Sum = $total
+echo Numbers entered was $count
+exit 0

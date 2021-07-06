@@ -1,0 +1,6 @@
+#!/bin/bash
+#    myprog1 - script to backup a daylog file
+#
+cp daylog $HOME/logback
+echo  done
+exit 0

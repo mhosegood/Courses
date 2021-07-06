@@ -1,0 +1,5 @@
+#!/bin/bash -v
+echo Welcome to this Bash shell test script.
+echo -n "Please press reurn to continue: "
+read response
+exit 0

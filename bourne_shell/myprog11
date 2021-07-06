@@ -1,0 +1,40 @@
+#!/bin/sh
+#
+#    myprog11 - script to backup multiple files
+#
+# Function totalit returns size of current argument in variable size
+# and increments variable totalsize
+totalit()
+{
+	if [ $totalsize ]; then
+		:
+	else
+		totalsize=0
+	fi
+	size=`wc -c $1 | awk '{print $1}'`
+	totalsize=`expr $totalsize + $size`
+}
+if [ $# -le 1 ]; then
+	read -p   "Type some filenames please:  " tocopy
+else
+	tocopy=$@
+fi
+
+for fyle in $tocopy
+do
+	echo "------------------ $fyle --------------"
+	if [ ! -f $fyle ]; then
+		echo "Not copied - is not a plain file"
+		continue
+	fi
+	if [ ! -w $HOME/logback ]; then
+		echo "Not able to write to output directory"
+		echo $0 COMMAND ABORTED
+		break
+	fi
+	cp $fyle $HOME/logback
+	totalit $fyle
+	echo "Backed up ......   size $size bytes "
+done
+echo "Total size of files backed up:  $totalsize"
+exit 0

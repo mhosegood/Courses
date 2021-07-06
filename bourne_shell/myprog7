@@ -1,0 +1,14 @@
+#!/bin/sh
+#    myprog7 - script to backup a multiple files
+#    prompts for file names if not given as parameters
+if [ $# -le 1 ] 
+then
+	read -p "Type what you wish to copy: " tocopy
+else
+        tocopy=$@
+fi
+cp  $tocopy  $HOME/logback
+echo  "copy(ies) of $tocopy made in backup directory"
+echo  -n "file count: "
+echo $tocopy | wc -w
+exit 0

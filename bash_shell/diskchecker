@@ -1,0 +1,10 @@
+#!/bin/bash
+#Checks percentage of free space
+percent=`df  / | tail  -1 | gawk '{print $5}' | sed 's/%//'`
+
+if [ $percent  -gt 80 ]; then
+	echo Warning disk on `uname -n` over 80 percent full
+else
+	echo Disk on `uname -n` is only ${percent}% full
+fi
+exit 0

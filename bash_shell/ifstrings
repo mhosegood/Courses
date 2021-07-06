@@ -1,0 +1,33 @@
+#!/bin/bash
+# Example script which compares strings
+echo -n "Enter 1st string: "
+read s1
+echo -n "Enter 2nd string: "
+read s2
+
+#Test 1
+if [[ $s1 == $s2 ]]; then
+	echo String s1 is identical to string s2
+fi
+
+#Test 2
+if [[ $s1 = $s2 ]]; then
+        echo String s1 is identical to string s2
+fi
+
+#Test 3
+if [ $s1 = $s2 ]; then
+	echo String s1 is identical to string s2
+fi
+
+#Test 4
+if [[ $s1 < $s2 ]]; then
+        echo String s1 would appear before string s2
+fi
+
+#Test 5
+if [[ $s1 > $s2 ]]; then
+        echo String s1 would appear after string s2
+fi
+
+exit 0

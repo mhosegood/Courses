@@ -1,0 +1,21 @@
+#!/bin/bash
+# Example of select statement to provide a menu
+PS3="What fish would you like with your chips? "
+select fish in haddock cod plaice sea-bass
+do
+	case $fish in
+		haddock) echo "That will be about 10 minutes, OK?" 
+		break;;
+		cod) echo "Large or small?" 
+		break;;
+		plaice) echo "Sorry, we are out of plaice" 
+		break;;
+		sea-bass) echo "Mediterrainean or Aegean?" 
+		break;;
+	 	*) echo Never heard of that - are you sure\? 
+		break;;
+	esac
+done
+echo ""
+echo "Salt and vinegar?"
+exit 0

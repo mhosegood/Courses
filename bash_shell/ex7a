@@ -1,0 +1,17 @@
+#!/bin/bash
+# Sample answer for SA course
+day=`date +%a`
+case "$day"
+in
+	Mon) dayname=Monday ;;
+	Tue) dayname=Tuesday ;;
+	Wed) dayname=Wednesday ;;
+	Thu) dayname=Thursday ;;
+	Fri) dayname=Friday ;;
+	Sat) dayname=Saturday ;;
+	Sun) dayname=Sunday ;;
+	*) echo Impossible day!! ;;
+esac
+
+date | sed "s/$day/$dayname/"
+exit 0

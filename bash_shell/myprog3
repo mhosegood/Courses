@@ -1,0 +1,8 @@
+#!/bin/bash
+#
+#    myprog3 - script to backup a multiple files
+#
+cp $* $HOME/logback
+echo "Copy(ies) of $* made in backup directory"
+
+exit 0

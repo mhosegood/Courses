@@ -1,0 +1,6 @@
+#!/bin/sh 
+#    myprog1 - script to backup a daylog file
+#
+cp $HOME/bourne_shell/daylog $HOME/logback
+echo  done
+exit 0

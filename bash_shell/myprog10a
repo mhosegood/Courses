@@ -1,0 +1,33 @@
+#!/bin/bash
+#
+#    myprog10a - script to process multiple files
+#
+# Function sizeit gives argument size in bytes
+sizeit()
+{
+	size=`wc $1 | gawk '{print $1}'`
+	echo $1 is $size bytes in size
+}
+# Function dateit gives modification time of argument
+dateit()
+{
+	fdate=`ls -l $1 | cut -c 42-54`
+	echo $1 was last modified $fdate
+}
+if [ $# -le 1 ]; then
+        echo  -n  "What do you want to process  "
+        read  ifiles
+else
+        ifiles=$*
+fi
+for varf in $ifiles
+do
+        echo  "------------------ $varf --------------"
+        if [ ! -r $varf -o ! -f $varf ]; then
+                echo  "Unable to process - not readable or not a file"
+                continue
+        fi
+	sizeit $varf
+	dateit $varf
+done
+exit 0

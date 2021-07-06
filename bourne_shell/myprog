@@ -1,0 +1,12 @@
+# This is a simple test script
+echo Good Day
+echo This is Simple script
+sleep 2
+date
+pwd
+ls -l
+cd /usr/games
+ls
+echo The above programs are the standard Linux games
+echo End of Simple Script
+exit 0
