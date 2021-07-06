@@ -1,0 +1,9 @@
+#!/bin/sh
+# script nameis hour
+case  ` date  +%H `
+in
+        0? | 1[01] ) echo "Good morning Oh hungover one";;
+        1[2-7] ) echo "Good afternoon Oh tired one";;
+        * ) echo " good evening Oh tipsy one";;
+esac
+exit 0

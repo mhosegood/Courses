@@ -1,0 +1,5 @@
+#!/bin/sh
+# Look someone up in the phonelist
+grep -i "$1" $HOME/p.list
+exit 0
+

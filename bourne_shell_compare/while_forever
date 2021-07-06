@@ -1,0 +1,17 @@
+#!/bin/sh 
+# while_forever
+while  true
+do
+        echo  -n "Please type the name of a directory: "
+        read answer
+        if [   !   -d   $answer   ]
+        then
+                echo   Not a directory - please try again
+                continue
+        else
+                echo   That is a directory - well done
+                break
+        fi
+done
+echo   Finished
+

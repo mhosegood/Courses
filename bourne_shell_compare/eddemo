@@ -1,0 +1,9 @@
+#!/bin/sh
+#Edit a file replacing  one word ( $1 ) with another ( $2 )
+#Script eddemo
+ed -s  file <<END
+1,\$s/$1/$2/g
+w
+q
+END
+echo "Done it .."

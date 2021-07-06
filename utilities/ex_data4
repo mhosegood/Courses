@@ -1,0 +1,100 @@
+#
+# Sun Host Database
+#
+# If the NIS is running, this file is only consulted when booting
+#
+127.0.0.1	localhost
+#
+192.9.200.50	fa loghost
+192.9.200.51	graham
+192.9.200.126	pauline
+192.9.200.208	scc
+192.9.200.25	kelmscot
+192.9.200.52	x350_1
+192.9.200.54	x350_2
+192.9.200.53	fa_cl3
+192.9.200.199   elonex
+192.9.200.99   micks
+192.9.200.192   xterm Xterminal
+192.9.200.87	wombat topcat
+192.9.200.24	radcot
+#Training Machines
+192.9.200.253	bond
+192.9.200.20	lotus
+192.9.200.220	granada
+192.9.200.49    isis
+192.9.200.45    thames
+192.9.200.5     hunt expo92
+192.9.200.1 	london
+192.9.200.221 	fulham
+192.9.200.102   astra
+192.9.200.101   cavalier
+192.9.200.4     mansell arthur
+192.9.200.98    sierra
+192.9.200.131   x350
+192.9.200.34   banana
+192.9.200.31    daylight
+192.9.200.2     didcot sub2
+192.9.200.30    cessna
+192.9.200.15    beech
+192.9.200.10    golfer-gw
+192.9.200.12    jaguar
+192.9.200.13    tornado
+192.9.200.14    elvis
+192.9.200.3     carlisle
+192.9.200.1	harwell
+192.9.200.58	ash
+200.17.24.42     cat
+200.17.24.2     golfer
+192.9.200.100   carlton
+#
+192.9.200.40    yamaha
+192.9.200.60    gra350
+192.9.200.33    apple
+192.9.200.59    tandoori
+192.9.200.88    spaniel
+192.9.200.150   elderberry
+192.9.200.151   earl
+192.9.200.55	fa_cl4
+192.9.200.57    oak
+192.9.200.56    dublin
+#
+192.9.200.43   sandwich
+192.9.200.44   blyth
+192.9.200.122	eton
+192.9.200.121	radley
+192.9.200.120   scholar
+192.9.200.146   cocoa eddie
+192.9.200.6     gatwick
+192.9.200.9     stanstead
+#
+192.9.200.70	jaguar
+192.9.200.71	cheetah
+# 192.9.200.72	panther
+192.9.200.73	tiger
+#
+192.9.200.191   bacon
+192.9.200.192   eggs
+192.9.200.193   tea
+192.9.200.194   toast
+192.9.200.195   cornflake
+192.9.200.196   milk
+192.9.200.197	marmalade
+192.9.200.231   ullapool
+192.9.200.234	dave
+192.9.200.123	rhubarb
+#
+192.9.200.211	fox
+192.9.200.212	badger
+192.9.200.213	mouse
+192.9.200.214	stoat
+192.9.200.215	squirrel
+192.9.200.216	vole
+192.9.200.217	bat
+#
+192.9.200.201	mercury panther
+192.9.200.202	mars
+192.9.200.203	saturn
+#
+192.9.200.222	research
+192.9.200.147	flipper

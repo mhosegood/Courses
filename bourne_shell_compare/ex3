@@ -1,0 +1,13 @@
+#!/bin/sh
+#page 24 exercise
+# file name is ex3
+fsize ()
+{
+	size=`ls  -l  $1 | awk '{print $5}'`
+	k=`expr $size / 1024`
+	b=`expr $size % 1024`
+	echo File size of $1 : ${k}k and $b bytes
+}
+echo -n "Enter a filename please: "
+read ifile
+fsize $ifile

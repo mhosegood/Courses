@@ -1,0 +1,5 @@
+#!/bin/sh
+# second scripting Bourne shell exercise
+# List directory
+ls -l $1 | grep -v ^d | sort -k5n | more
+exit 0

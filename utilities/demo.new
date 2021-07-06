@@ -1,0 +1,12 @@
+nawk
+ 
+"nawk" is an enhanced form of "awk".  We encourage
+the use of nawk, even though the extra  facilities
+it provides are not often needed!
+ 
+nawk  [  program  ]  [ filename...]
+nawk  [ -f program-file ] [ filename...]
+ 
+Nawk scans every  input  filename  for  lines  that
+match any  of  a  set  of  patterns  specified  in
+program.

@@ -1,0 +1,10 @@
+#!/bin/sh
+#  Program to print out just directory entries
+# This script is called dlist 
+lds ()
+{
+	ls  -la   $1  | grep   \^d 
+}
+echo -n "Enter a directory name please: "
+read  dirname
+lds  $dirname

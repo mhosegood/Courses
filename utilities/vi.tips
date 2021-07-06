@@ -1,0 +1,93 @@
+##### NOTE:  the .exrc file does not allow comments.  Therefore, before
+#####   you use this file, strip out anything that begins with '#' if
+#####   you want it to work.
+#
+#One of the first things I did when I started using Unix was to write 
+#some simple vi macro commands which perform operations on blocks
+#of lines.  This sort of thing (e.g. block copy, delete, or shift)
+#is one of the most frequent things I do when editing, and I found it
+#awkward to specify in unadorned vi.  By including some 'map' commands
+#in my ~/.exrc , I created some two-character commands which greatly
+#facilitate block operations.
+#
+map @@ mt
+map @D $d'tmbkmt`b
+map @Y mb$y't`b
+map @C mxjmb`x$c't
+map @> mb>'t`b3l
+map @< mb<'t`b3h
+map @: mb:'t,'b
+map @d d`tmbhmt`b
+map @y mby`t`b
+map @c mbc`t
+map @T `t
+map @B `b
+#
+#This will create the following two-character commands:
+#
+#@@ - the current cursor position is marked as the 'top' of the block
+#    you want to operate on.  After this is done, move the
+#    cursor to the 'bottom' of the block and give one of the
+#    following commands:
+#
+#@D - delete all lines of the block
+#@Y - yank all lines of the block
+#@C - delete all lines of the block and enter input mode
+#@> - shift the entire block right by <shiftwidth> characters
+#@< - shift the entire block left by <shiftwidth> characters
+#  (note that the value of <shiftwidth> - 3 in my case - has to be
+#      coded directly into the definitions for @> and @< )
+#@: - enter ex command input mode after defining the block for an ex
+#   command.  For example, '@:w foobar<return>' will write the block of
+#   lines into a file named 'foobar'.
+#@d - like @D, but operates on blocks of characters, not blocks of entire lines.
+#@y - like @Y, but operates on blocks of characters, not blocks of entire lines.
+#@c - like @C, but operates on blocks of characters, not blocks of entire lines.
+#@T - return cursor to 'top' of block, defined by last @@ command.
+#@B - return cursor to 'bottom' of block, defined by last @* command
+#    (@* = @D, @Y, etc.)
+#" undocumented commands: CTRL-T (pop tagstack)
+#" unusable commands: CTRL-C CTRL-I(TAB)
+#" unused commands: CTRL-A CTRL-K CTRL-O CTRL-\ * V _ v
+#" (Other commands may be unused, but I map them to something.
+#" I also map some commands that have definitions that I don't need.)
+
+#"  Allow gs (global search) for :%s
+map g		:%
+#" K:  invert capitalization (case) and go to next word, ready to repeat.
+map K		~w
+#" CTRL-P:  format a paragraph
+map 		!}fmt -75
+#" q:  fast way to exit vi
+map q		:quit
+#"  R1 Flip between two files (go back)
+map [208z	:e # 
+#"  R2 What file and what status (modified?)
+map [209z	:f
+#"  R3 Go to next file
+map [210z	:n 
+#"  R4 Generate /\< to search for a word (R6 will generate \>\n triple)
+map [211z	/\<
+#"  R5 Generate n. to search for next instance and repeat operation.
+map [212z	n.
+#"  R7 Diff file (%) against vi's buffer (diff's stdin is -).
+map [214z	:w !diff % -
+#"  R8 Generate .n to repeat operation and then search for next instance.
+map [A	.n
+#"  R9 Change to _ character (type replacement text & end with ESC)
+map [216z	ct_
+#"  Note that . will NOT repeat the replacement.
+#"  R10 Put /* */ around current line (must not already be in C comments)
+map [D	I/* A */
+#"  R11 Write the file
+map [218z	:w
+#"  R12 Yank the Word the cursor is on (into buffer G)...
+map [C	jki/
+#"  R14 Scan downward for it.  Note: single map jki/"gyWx@g fails.
+map [B	"gyWx@g
+#" Insert-mode replacements for .ttyswrc assignments (R4,R5,R6):
+map! [211z	\<
+map! [212z	\.
+map! [213z	\>
+
+

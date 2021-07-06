@@ -1,0 +1,7 @@
+#!/bin/sh
+# Program "is-he-on" to find out if someone is logged on to me
+# It takes an argument of a user name.
+if  who  |  grep  -s  $1 > /dev/null
+then
+	echo  "$1 is logged on "
+fi

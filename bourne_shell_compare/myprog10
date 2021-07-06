@@ -1,0 +1,31 @@
+#!/bin/sh
+#
+#    myprog10 - script to backup multiple files
+#
+if [ $# -le 1 ]; then
+        read  -p "What do you want to copy   " tocopy
+else
+        tocopy=$@
+fi
+when=`date`
+for fyle in $tocopy
+do
+        echo  "------------------ $fyle --------------"
+        if [ !  -r  $fyle ]; then
+                echo  "Unable to read (might not exist)"
+                continue
+        fi
+        if [ !  -f  $fyle ]; then
+                echo  "Not copied - is not a plain file"
+                continue
+        fi
+        if [ !  -w  $HOME/logback ]; then
+                echo  "Not able to write to output directory"
+                echo  $0 COMMAND ABORTED
+                break
+        fi
+        cp  $fyle  $HOME/logback
+        stats=`wc $fyle | awk '{print $1}'`
+        echo  "$when : $stats bytes"
+done
+exit 0

@@ -1,0 +1,24 @@
+#!/bin/sh
+#An example trap script
+# Create a temporary file for testing purposes
+touch mytempfile
+# First set trap conditions for signals 1 and 2
+trap "rm  mytempfile ; echo  Leaving my script; exit "  1 2
+# Trap command on its own displays current trap settings
+trap
+# Display process ID so we can send it a signal from another window
+echo ID is $$
+# If you send signal 1 during this next pause
+# The script will exit at the end of it, and will have executed
+# the conditions for trap 1 and 2
+sleep 20
+echo 20 second pause is over, now setting ignore for signal 2
+# Next trap command causes shell to ignore signal 2 (^C)
+trap  " "  2  
+echo " And now assume some commands "
+sleep 20
+# Now restore the default signal 2 behaviour
+trap  2  
+echo  " And some more commands "
+sleep 20
+exit 0

@@ -1,0 +1,18 @@
+#!/bin/sh
+#A file copy program called copy
+if [  $#  -ne  2 ]
+then
+	echo  " Run me as follows : copy  file(from)  file(to) "
+	exit
+fi
+if [  -f   $2  ]; then
+	echo " Output file already exists"
+	 exit
+ fi
+if [  !  -r  $1    -o    \( -d  $2    -a    !  -w  $2 \)  ]; then
+	echo "File/Directory permissions wrong"
+	 exit
+ fi
+cp  $1  $2
+echo " $1 copied to  $2 "
+

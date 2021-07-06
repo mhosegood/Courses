@@ -1,0 +1,33 @@
+#!/bin/sh
+#
+#  Second sample program - what does this do?
+#
+chekit()
+{
+if [ ! $1 $filename ];then  echo -n "NOT "; fi
+}
+# ----------------------------------------------
+if [ $# -eq 0 ]; then
+	read -p "please give me a file name: " filename
+else
+	filename=$1
+fi
+#
+echo this will run on \"$filename\"
+#
+echo ""
+if [ -d $filename ]; then
+	echo "The named object is a directory"
+elif [ -f $filename ]; then
+	echo "The named object is a file which is "
+	chekit -r 
+	echo "readable!"
+	chekit -w 
+	echo "writable!"
+	chekit -x 
+	echo "executable!"
+else
+	echo "The named object is neither a file nor a directory"
+fi
+echo ""
+exit 0

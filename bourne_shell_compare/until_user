@@ -1,0 +1,13 @@
+#! /bin/sh
+#Looking for a particular user to log on - script until_user
+if  [  $#  -eq  1  ]
+then
+	until who |  grep   "^$1" > /dev/null
+	do
+		sleep  120
+	done
+	echo "  $1  has logged on..."
+else
+echo " This script needs a valid login user as an argument. "
+fi
+exit 0

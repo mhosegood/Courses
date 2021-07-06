@@ -1,0 +1,21 @@
+#!/bin/sh
+#Another_ls
+echo -n "Please enter a list of files/directories: "
+read files
+if  [ !  -z  "$files"  ] ; then
+then
+	for  varf  in  $files
+	do
+		if [  -d  $varf  ]
+		then
+			echo  " $varf  (DIR) "
+		elif  [  -x  $varf  ]
+		then
+			echo  " $varf  (EXEC)"
+		else
+			echo  " $varf   (FILE)  "
+		fi
+	done
+else
+	echo   "Please run with file(s) as arguments."
+fi

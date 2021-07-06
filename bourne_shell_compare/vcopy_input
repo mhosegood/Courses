@@ -1,0 +1,7 @@
+#!/bin/sh 
+#vcopy_input
+#Backup any of my files 
+echo -n "Please type filename[s] for back up:  "
+read  files
+echo  ${files:?"Please run me with file names.."}
+cp   $files  /tmp/arthur/Back_dir

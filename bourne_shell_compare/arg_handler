@@ -1,0 +1,19 @@
+#!/bin/sh
+# script name is arg_handler
+# Using shift to handle arguments.
+while  [ $#  >  0 ]
+do
+        if [ .$1 = .-v ]; then
+                tell=1
+		shift
+		continue
+        fi
+	if [ .$1 = .-h ]; then
+		host=1
+		shift
+		continue
+	fi
+	break
+done
+echo the rest of the arguments are: $@
+exit 0

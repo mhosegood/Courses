@@ -1,0 +1,34 @@
+#!/bin/sh
+# Sample answer for SA course
+day=`date +%a`
+case "$day"
+in
+	Mon) dayname=Monday ;;
+	Tue) dayname=Tuesday ;;
+	Wed) dayname=Wednesday ;;
+	Thu) dayname=Thursday ;;
+	Fri) dayname=Friday ;;
+	Sat) dayname=Saturday ;;
+	Sun) dayname=Sunday ;;
+	*) echo Impossible day!! ;;
+esac
+
+month=`date +%b`
+case "$month"
+in
+	Jan) monthname=January ;;
+	Feb) monthname=February ;;
+	Mar) monthname=March ;;
+	Apr) monthname=April ;;
+	May) monthname=May ;;
+	Jun) monthname=June ;;
+	Jul) monthname=July ;;
+	Aug) monthname=August ;;
+	Sep) monthname=September ;;
+	Oct) monthname=October ;;
+	Nov) monthname=November ;;
+	Dec) monthname=December ;;
+	*) echo Impossible month !! ;;
+esac
+date | sed -e "s/$day/$dayname/" -e "s/$month/$monthname/"
+exit 0
