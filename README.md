@@ -1,2 +1,2 @@
 # hello-world
-Just a stab in the dark
+# The home of my course files
