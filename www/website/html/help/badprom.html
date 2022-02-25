@@ -1,0 +1,104 @@
+<HTML>
+<HEAD>
+<TITLE>First Alternative - Sun with EEPROM failure</TITLE>
+<META Name="Description" Content="Solaris Workstation two different IP addresses.">
+<META Name="Keywords" Content="addresses different ip solaris workstation">
+<META Name="robots" content="index,follow">
+<META Name="author" content="Well House Consultants; lisa@wellho.com, graham@wellho.com">
+<link rel="stylesheet" href="../firstalt.css" type="text/css">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<CENTER>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#000066">
+<tr> 
+<td width="1%"><img src="../img/firstaltlogo.gif" width="100" height="100"></td>
+<td>
+<div align="center" class="bighd"><font color="#FFFFFF">Technical Tip</font> </div>
+</td>
+</tr>
+</table>
+<TABLE BORDER=0 WIDTH=100%>
+<TR> 
+<TD> 
+<p class="medhd"><span class="smlhd">QUESTION</span></p>
+<blockquote> 
+<p class="bdy"><i>My (Sun) ID Prom has failed. Can I use my machine? Can I replace 
+the ID Chip with a regularly available chip, or do I have to wait for one to be 
+made?</i></p>
+</blockquote>
+<IMG SRC="../img/sunface.gif" ALIGN=RIGHT HEIGHT=177 WIDTH=85><span class="smlhd">ANSWER</span> 
+<p class="bdy">Yes - you *can* use your machine. But you MAY need to enter its 
+ethernet address and serial number each time you power it up.</p>
+<p class="bdy">Here's an example for a Sparc 1+</p>
+<ul>
+<li class="bdy">Power up; when testing, hold stop key and enter "A" to give you 
+the PROM monitor prompt of ">" 
+<li class="bdy">Switch to new command mode by entering "n" and return 
+<li><span class="bdy">In new command mode, enter the following:<br>
+</span> 
+<ul>
+<span class="bdy"> 0 0 mkp<br>
+8 0 20 a b c 53001234 mkpl<br>
+^D^R </span> 
+</ul>
+<span class="bdy">Which sets up an ethernet address and serial number </span>
+<li><span class="bdy">Boot the machine. For example, you might enter </span> 
+<ul>
+<span class="bdy"> old-mode<br>
+b sd(0,2,0) </span> 
+</ul>
+<span class="bdy">To boot from the disc as SCSI target 2</span> 
+<p> 
+</ul>
+<blockquote> 
+<p class="bdy">For a permanent fix - yes, you can replace the PROM chip by a commercially 
+available PROM; once you have done so, the commands listed above will cause the 
+new settings to be saved. As sources may change, please email <a href="mailto:mick@firstalt.co.uk" class="bdylinks">Mick 
+Hosegood</a> for current information.</p>
+</blockquote>
+<p class="smlhd">NOTES</p>
+
+<ul>
+<li class="bdy">The ethernet address (8 0 20 a b c) must be unique to each workstation 
+on your network, so if you have (or have had) several systems fail, choose a different 
+address for each! The "8 0 20" means Sun - don't change that; the "a b c" are 
+three hex pair - so you have a huge choice; it would work equally well with "5 
+3a 12" or "44 55 66", for example </li>
+<li class="bdy">The hostid must also be unique to your network. The first four 
+digits are usually the system type - on our example, 5300 is a Sparc Station 1+ 
+- and must be correct: </li>
+<ul>
+<span class="bdy"> 5300 Sparc Station 1+<br>
+5600 Sparc ELC<br>
+5200 Sparc 1<br>
+5500 Sparc 2<br>
+80xx Classic, Sparc 4, Sparc 5 (2 digits only significant) </span> 
+</ul>
+</ul>
+<blockquote> 
+<p class="bdy">(see your system documentation for other values), and the last 
+4 digits are a serial number.</p>
+</blockquote>
+<ul>
+<li><span class="bdy">If your system runs licensed software, you may need to use 
+the same hostid and/or ethernet address that was burnt into the failed EEPROM. 
+If you don't know what the settings were - sorry, you have a problem and may need 
+the assistance of the software supplier.</span>
+<li><span class="bdy"> ^D^R means "Control D, Control R". You are NOT prompted 
+for this after you enter the previous line; the system looks as if it has hung!</span>
+<li><span class="bdy">As of January 1997, PROM chips available are</span>
+<ul>
+<span class="bdy"> M48TO2-120PC1 (up to 120 MHz)<br>
+M48TO2-150PC1 (up to 150 MHz)<br>
+M48TO2-200PC1 (up to 200 MHz)</span>
+</ul>
+<span class="bdy">which we source from Farnells, in Leeds, UK.</span>
+</ul>
+<p class="bdy" align="center"><a href="javascript:close()" class="bdylinks">close 
+window</a></p>
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+</BODY></HTML>
+

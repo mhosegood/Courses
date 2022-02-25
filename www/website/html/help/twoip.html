@@ -1,0 +1,151 @@
+<HTML>
+<HEAD>
+<TITLE>First Alternative - Multiple IP addresses</TITLE>
+<META Name="Description" Content="Solaris Workstation two different IP addresses.">
+<META Name="Keywords" Content="addresses different ip solaris workstation">
+<META Name="robots" content="index,follow">
+<META Name="author" content="Well House Consultants; lisa@wellho.com, graham@wellho.com">
+<link rel="stylesheet" href="../firstalt.css" type="text/css">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<CENTER>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#000066">
+<tr> 
+<td width="1%"><img src="../img/firstaltlogo.gif" width="100" height="100"></td>
+<td>
+<div align="center" class="bighd"><font color="#FFFFFF">Technical Tip</font> </div>
+</td>
+</tr>
+</table>
+<TABLE BORDER=0 WIDTH=100%>
+<TR> 
+<TD> 
+<p class="medhd"><span class="smlhd">QUESTION</span></p>
+<blockquote> 
+<p class="bdy"><i>How can I get my Sun workstation to respond to two different 
+IP addresses?</i></p>
+</blockquote>
+<IMG SRC="../img/sunface.gif" ALIGN=RIGHT HEIGHT=177 WIDTH=85><span class="smlhd">ANSWER</span> 
+<OL>
+<LI class="bdy"><span class="bdy">Each device on an IP based ethernet needs to 
+have a name. Since your workstation is going to be (in effect) TWO devices, you 
+need to choose a second name. That second name needs to be added to the file </span><tt>/etc/hosts</tt><span class="bdy"> 
+on the workstation, AND to the database on any name service systems that will 
+include it in their domain.</span> <span class="bdy">Example. If you have a system 
+known as "</span><tt>herring</tt><span class="bdy">" which responds to the IP 
+address </span><tt>192.9.200.47</tt><span class="bdy">, and you also want it to 
+respond to </span><tt>155.134.44.17</tt><span class="bdy"> as "</span><tt>jupiter</tt><span class="bdy">", 
+the you will ensure that you have both the following lines in </span><tt>/etc/hosts:</tt> 
+<UL>
+<tt>192.9.200.47 herring</tt><BR>
+<tt>155.134.44.17 jupiter</tt>
+</UL><br>
+<li class="bdy"><span class="bdy">You now need to choose which ethernet interface 
+the second address will be used on.</span> 
+<UL>
+<li class="bdy"><span class="bdy">If it will be used on the SAME interface that 
+you already use (for "</span><tt>herring</tt><span class="bdy">") in our example, 
+then you run the ifconfig command to bring the second name into use, as follows:</span> 
+<UL>
+<TT>ifconfig le0:1 jupiter up</TT><br>
+<span class="bdy">(in this example, the default interface has the name "</span><tt>le0</tt><span class="bdy">") 
+</span>
+</UL>
+<LI><span class="bdy">If it will be used on a second interface, then you can run 
+the ifconfig command as follow:</span> 
+<UL>
+<TT>ifconfig le1 jupiter up</TT><br>
+<span class="bdy">(where "</span><tt>le1</tt><span class="bdy">" is the name of 
+the second interface.)</span>
+</UL>
+</UL>
+<span class="bdy"> At this point your system is responding to the second IP 
+address, but:</span><UL>
+<li class="bdy"><span class="bdy">It will NOT be routing information between networks</span>
+<li class="bdy"><span class="bdy">The second interface will NOT restart if you reboot</span></UL>
+<br> 
+<li class="bdy"><span class="bdy">If you wish your work station to ROUTE IP packets 
+between networks, then you need to create a file called "</span><tt>/etc/hostname.xyz</tt><span class="bdy">", 
+containing just the name of the second interface ["</span><tt>xyz</tt><span class="bdy">" is the interface 
+name]</span> 
+<P><span class="bdy">In our example, the file will be called</span> 
+<UL>
+<TT>/etc/hostname.le0:1</TT><span class="bdy"> (for a second address on one interface)</span><BR>
+<TT>/etc/hostname.le1</TT><span class="bdy"> (for a second interface)</span>
+</UL>
+<span class="bdy">and would (in either example) simple contain the word</span>
+<UL>
+<TT>jupiter</TT>
+</UL>
+<P><span class="bdy">You should then reboot the workstation, which will bring 
+the extra IP address into use as the daemons restart, and it will also start the 
+routing daemon "</span><tt>in.routed</tt><span class="bdy">" in the correct way.</span> 
+<P><span class="bdy"> On our advanced Solaris 2 admin course, we go set up a machine 
+as a router between two networks as one of the many practical exercise.</span>
+<P> 
+<LI class="bdy"><span class="bdy">If you do NOT wish your interface to route packets, 
+we suggest that you do NOT create the extra "</span><tt>/etc/hostname</tt><span class="bdy">" files. Instead, 
+you should modify your daemon startup scripts to include the "</span><tt>ifconfig</tt><span class="bdy">" 
+commands described earlier at an appropriate point.</span><p>
+<span class="bdy">As an example, you may wish to respond to a second IP address 
+just to provide a web server at "arm's length" from the main tasks of the workstation. 
+Here's a file - </span><tt>/etc/rc3.d/S30web.server</tt><span class="bdy"> - which we use on our Web Presence 
+course to start the second IP address as well as the web server.</span>
+<PRE>#!/bin/sh
+#
+if [ ! -d /usr/bin ]
+then                    # /usr not mounted
+        exit
+fi
+killproc() {            # kill the named process(es)
+        pid=`/usr/bin/ps -e |
+             /usr/bin/grep -w $1 |
+             /usr/bin/sed -e 's/^  *//' -e 's/ .*//'`
+        [ "$pid" != "" ] && kill $pid
+}
+# Start/stop processes required for Apache Server
+case "$1" in
+'start')
+        # Start the httpd daemon if it exists
+        # ALSO set the network interface for the server ...
+        #
+        ifconfig le0:1 jupiter up
+        if [ -f /usr/local/bin/httpd ] ; then
+        /usr/local/bin/httpd -f /usr/local/etc/httpd/conf/httpd.conf
+        echo "\nApache Web Server Started ...\n\n"
+        fi
+        ;;
+'stop')
+        killproc httpd
+        ;;
+*)
+        echo "Usage: /etc/init.d/web.server { start | stop }"
+        ;;
+esac
+</PRE>
+<P class="bdy"> Once you have installed a file like this (do remember to edit 
+it to meet your own needs), you should reboot your system in order to test it. 
+</OL>
+<p class="smlhd">NOTES</p>
+<UL>
+<LI><span class="bdy">Step 1 is ALWAYS necessary.</span>
+<LI><span class="bdy">Step 2 is recommended for testing purposes, but CAN be omitted 
+if you are confident and intend to do an immediate reboot.</span>
+<LI><span class="bdy">Step 3 is only necessary if you wish your machine to be a router.</span>
+<LI><span class="bdy">Step 4 is only necessary if you want your machine to restart the 
+second IP address on reboot, but NOT act as a router.</span>
+<LI><span class="bdy">The above has been tested on Solaris 2.5, and should also work 
+on other recent Solaris 2 releases. On Solaris 1 (SunOS 4) the principle is similar, 
+but there are differences - especially in step 4.</span>
+</UL>
+<p class="bdy">First Alternative course tutors can answer questions like this 
+... and are happy to do so. Look around our site for relevant courses in Unix 
+- Perl - Solaris - FrameMaker</p>
+<p class="bdy" align="center"><a href="javascript:close()" class="bdylinks">close 
+window</a></p>
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+</BODY></HTML>
+
